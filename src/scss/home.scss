@@ -1,0 +1,78 @@
+@import "_variables";
+
+.banner {
+    color: #000;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.4)),url('img/banner.jpg');
+    background-size: cover;
+    background-position: center;
+
+    .banner-text {
+        text-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+        text-align: center;
+        color: #fff;
+        padding: 0 30px;
+
+        .banner-title {
+            text-transform: uppercase;
+            font-size: 3rem;
+
+            @include md {
+                font-size: 5rem;
+            }
+
+            @include xl {
+                font-size: 7rem;
+            }
+        }
+
+        .banner-subtitle {
+            font-size: 1rem;
+            opacity: .7;
+
+            @include md {
+                font-size: 1.4rem;
+            }
+        }
+
+        .banner-cta {
+            margin-top: 25px;
+
+            a {
+                color: #fff;
+                text-decoration: none;
+                border-bottom: solid 3px #000;
+                transition: border-bottom .4s;
+                font-weight: bold;
+                font-size: 1.3rem;
+
+                @include md {
+                    font-size: 1.6rem;
+                }
+
+                &:hover {
+                    border-bottom: solid 3px #fff;
+                }
+            }
+        }
+    }
+
+    & > span {
+        display: block;
+        text-align: center;
+        padding: 20px;
+        font-size: 1.1rem;
+        color: #fff;
+        cursor: pointer;
+
+        p {
+            display: inline;
+            margin: 0;
+            padding: 0 10px;
+            text-decoration: underline;
+        }
+    }
+}

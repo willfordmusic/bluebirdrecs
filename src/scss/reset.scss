@@ -16,7 +16,12 @@ html, body {
 
 main {
     min-height: 100%;
-    padding-top: 100px;
+    padding-top: 88px;
+    background-color: #f8f8f8;
+
+    @include md {
+        padding-top: 102px;
+    }
 }
 
 .show-breakpoints {
