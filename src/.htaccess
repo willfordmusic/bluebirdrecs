@@ -1,0 +1,15 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} /+[^\.]+$
+RewriteRule ^(.+[^/])$ %{REQUEST_URI}/ [R=301]
+
+RewriteRule ^music/?$ music.html
+RewriteRule ^music/(.*)/$ track.html?link=$1
+
+# WHY DOES ARTISTS REWRITE WTTFFFF
+RewriteRule ^artists/?$ artists.html
+RewriteRule ^artists/(.*)/$ artist.html?name=$1
+RewriteRule ^demo/?$ demo.html
+RewriteRule ^404/?$ 404.html [L]
+
+ErrorDocument 404 {root}404/

@@ -1,0 +1,157 @@
+@import "_variables";
+
+.nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #fff;
+    transition: background-color .5s;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 0px 21px 1px rgba(0,0,0,0.1);
+
+    & > .container {
+        padding: 10px 60px;
+        width: 100%;
+
+        @include sm {
+            max-width: 600px;
+        }
+
+        @include md {
+            max-width: 900px;
+        }
+
+        @include lg {
+            padding: 10px 100px;
+            max-width: 1100px;
+        }
+
+        @include xl {
+            max-width: 1300px;
+        }
+    }
+
+    .mobile-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    
+        @include md {
+            display: none;
+        }
+    
+        span {
+            font-size: 30px;
+            padding: 10px;
+        }
+    }
+
+    &.scrolled {
+        background-color: #000;
+
+        .mobile-nav span {
+            color: #fff;
+        }
+
+        .nav-item a {
+            color: #d3d3d3!important;
+
+            &:hover {
+                color: #fff!important;
+            }
+        }
+
+        .nav-item &.active a {
+            color: #fff!important;
+        }
+    }
+}
+
+.nav-collapse {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .8s;
+
+    &.expanded {
+        max-height: 344px;
+    }
+
+    @include md {
+        max-height: 400px!important;
+        height: auto;
+        overflow: show;
+    }
+
+    .nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: space-around;
+
+        @include md {
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
+    }
+}
+
+.nav-item {
+    transition: transform .5s, opacity 1.3s;
+    opacity: 1;
+
+    a {
+        display: block;
+        padding: 2rem 1rem;
+        text-transform: lowercase;
+        text-decoration: none;
+        color: rgba(0, 0, 0, .5);
+        transition: color .4s;
+        font-size: 1.2rem;
+        text-align: center;
+
+        @include md {
+            padding: .3rem 1rem;
+        }
+
+        &:hover {
+            color: rgba(0, 0, 0, .7);
+        }
+    }
+
+    &.hidden {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    &.active a {
+        color: #000;
+        font-weight: 700;
+    }
+
+    &.brand {
+        display: none;
+
+        img {
+            margin-top: 4px;
+        }
+
+        @include md {
+            display: list-item;
+        }
+    }
+}
+
+// Delete this
+main {
+    margin-top: 100px;
+}
+
+body {
+    height: 200%!important;
+}
