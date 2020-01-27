@@ -74,7 +74,7 @@ function processHTML() {
         .pipe(injectPartials({
             start: '<partial path="{{path}}">',
             end: '</partial>',
-            removeTags: production,
+            removeTags: true,
             prefix: '../partials/',
             quiet: true
         }))
