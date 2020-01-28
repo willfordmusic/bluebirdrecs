@@ -78,7 +78,7 @@ function processHTML() {
             prefix: '../partials/',
             quiet: true
         }))
-        .pipe(gulpif(production, replace('{root}', 'https://bluebirdrecs.com/'), replace('{root}', 'http://localhost/bluebirdrecs_new/dist/')))
+        .pipe(gulpif(production, replace('{root}', 'https://bluebirdrecs.com/'), replace('{root}', 'http://localhost/bluebirdrecs/dist/')))
         .pipe(gulpif(production, uglifyHTML({
             urlSchemes: false
         })))
@@ -87,7 +87,7 @@ function processHTML() {
 
 function processHTACCESS() {
     return src(['src/.htaccess'])
-        .pipe(gulpif(production, replace('{root}', 'https://bluebirdrecs.com/'), replace('{root}', 'http://localhost/bluebirdrecs_new/dist/')))
+        .pipe(gulpif(production, replace('{root}', 'https://bluebirdrecs.com/'), replace('{root}', 'http://localhost/bluebirdrecs/dist/')))
         .pipe(dest('dist/'));
 }
 

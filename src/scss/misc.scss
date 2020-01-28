@@ -1,0 +1,24 @@
+@import "_variables";
+
+.message {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 150px 50px;
+
+    @include md {
+        padding: 200px 100px;
+    }
+
+    .message-header {
+        font-size: 4rem;
+ 
+        @include md {
+            font-size: 5rem;
+        }
+    }
+
+    .message-body {
+        margin-top: 20px;
+    }
+}

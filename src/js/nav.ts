@@ -18,22 +18,15 @@ $(document).ready(() => {
     });
 
     // Set active menu item
-    switch (window.location.pathname) {
-        case APP_ROOT:
-            $('#nav-item-home').addClass('active');
-            break;
-        case APP_ROOT + 'music/':
-            $('#nav-item-music').addClass('active');
-            break;
-        case APP_ROOT + 'artists/':
-            $('#nav-item-artists').addClass('active');
-            break;
-        case APP_ROOT + 'demo/':
-            $('#nav-item-demo').addClass('active');
-            break;
-    }
+    let active : string = '';
+    const p : string = window.location.pathname;
+    if (p === APP_ROOT) active = 'home';
+    else if (p.startsWith(APP_ROOT + 'music/')) active = 'music';
+    else if (p.startsWith(APP_ROOT + 'artists/')) active = 'artists';
+    else if (p === APP_ROOT + 'demo/') active = 'demo';
+    $(`#nav-item-${active}`).addClass('active');
 
-    // Fade in menu items
+    // Animate in menu items
     const interval : number = 150;
     setTimeout(() => {
         $('#nav-item-home').removeClass('hidden');
