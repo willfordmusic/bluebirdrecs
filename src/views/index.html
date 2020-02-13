@@ -10,11 +10,33 @@
                 <a href="">out now</a> <!--todo add href-->
             </div>
         </div>
-        <span>
+        <span id="scroll-text">
             <i class="fas fa-arrow-down"></i>
-            <p>scroll down</p>
+            <span>scroll down</span>
             <i class="fas fa-arrow-down"></i>
         </span>
     </div>
+    <div class="home-sections">
+        <div class="home-container">
+            <h3>Latest Releases</h3>
+            <div class="home-container-list" id="home-track-list"></div>
+        </div>
+        <div class="home-container">
+            <h3>Featured Artists</h3>
+            <div class="home-container-list" id="home-artist-list"></div>
+        </div>
+    </div>
 </main>
+
+<!-- Home Container List Item Template -->
+<!-- Variables: artist, title, img, link -->
+<script type="text/html" id="home-list-item">
+    <div class="home-list-item">
+        <a href="{root}/{{link}}/">
+            <img alt="{{title}}" src="{{img}}">
+            <div class="artist">{{artist}}</div>
+            <div class="title">{{title}}</div>
+        </a>
+    </div>
+</script>
 <partial path="foot.html"></partial>

@@ -18,8 +18,8 @@ $(document).ready(() => {
     });
 
     // Set active menu item
-    let active : string = '';
-    const p : string = window.location.pathname;
+    let active: string = '';
+    const p: string = window.location.pathname;
     if (p === APP_ROOT) active = 'home';
     else if (p.startsWith(APP_ROOT + 'music/')) active = 'music';
     else if (p.startsWith(APP_ROOT + 'artists/')) active = 'artists';
@@ -27,7 +27,7 @@ $(document).ready(() => {
     $(`#nav-item-${active}`).addClass('active');
 
     // Animate in menu items
-    const interval : number = 150;
+    const interval: number = 150;
     setTimeout(() => {
         $('#nav-item-home').removeClass('hidden');
         setTimeout(() => {

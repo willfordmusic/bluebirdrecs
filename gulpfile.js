@@ -19,7 +19,16 @@ const uglifyHTML = require('gulp-cshtml-minify');
 const replace = require('gulp-replace');
 
 // Public variables
-const production = false;
+const production = true;
+const devRoot = 'http://localhost/bluebirdrecs/dist/';
+const productionRoot = 'http://localhost/bluebirdrecs/dist/';
+//const productionRoot = 'https://bluebirdrecs.com/';
+
+const jsLibs = ['src/js/libs/jquery-3.4.1.min.js'];
+const ts = [
+    'src/js/core.ts', 'src/js/template.ts', 'src/js/nav.ts', 
+    'src/js/home.ts'
+];
 
 // Clean functions
 function cleanAll() {
@@ -61,9 +70,9 @@ function processCSS() {
 }
 
 function processJS() {
-    return src('src/js/*.ts')
+    return src(ts)
+        .pipe(concat('main.ts'))
         .pipe(typescript())
-        .pipe(src('src/js/*.js'))
         .pipe(concat('main.js'))
         .pipe(gulpif(production, uglifyJS()))
         .pipe(dest('dist/'));
@@ -78,16 +87,14 @@ function processHTML() {
             prefix: '../partials/',
             quiet: true
         }))
-        .pipe(gulpif(production, replace('{root}', 'https://bluebirdrecs.com/'), replace('{root}', 'http://localhost/bluebirdrecs/dist/')))
-        .pipe(gulpif(production, uglifyHTML({
-            urlSchemes: false
-        })))
+        .pipe(gulpif(production, replace('{root}', productionRoot), replace('{root}', devRoot)))
+        .pipe(gulpif(production, uglifyHTML({ urlSchemes: false })))
         .pipe(dest('dist/'));
 }
 
 function processHTACCESS() {
     return src(['src/.htaccess'])
-        .pipe(gulpif(production, replace('{root}', 'https://bluebirdrecs.com/'), replace('{root}', 'http://localhost/bluebirdrecs/dist/')))
+        .pipe(gulpif(production, replace('{root}', productionRoot), replace('{root}', devRoot)))
         .pipe(dest('dist/'));
 }
 
@@ -99,7 +106,7 @@ function processIMG() {
 
 // Process libraries
 function libsJS() {
-    return src(['src/js/libs/jquery-3.4.1.min.js'])
+    return src(jsLibs)
         .pipe(concat('libs.js'))
         .pipe(dest('dist/'));
 }
