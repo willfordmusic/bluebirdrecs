@@ -1,6 +1,18 @@
 <partial path="head.html"></partial>
 <partial path="nav.html"></partial>
 <main>
-    music
+    <div class="music-page-container" id="music-page-container"></div>
 </main>
+
+<!-- List Item Template -->
+<!-- Variables: artist, title, img, link -->
+<script type="text/html" id="music-list-item">
+    <div class="music-list-item">
+        <a href="{root}%%link%%/">
+            <img alt="%%title%%" src="%%img%%">
+            <div class="subtitle">%%subtitle%%</div>
+            <div class="title">%%title%%</div>
+        </a>
+    </div>
+</script>
 <partial path="foot.html"></partial>

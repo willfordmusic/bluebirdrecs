@@ -10,7 +10,7 @@ function template(templateid: string, appendto: string, args: TemplateArg[]): vo
 
     // Process arguments
     args.map((a) => { 
-        template = template.split(`{{${a.label}}}`).join(a.value);
+        template = template.split(`%%${a.label}%%`).join(a.value);
     });
 
     // Append templated element

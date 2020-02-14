@@ -19,45 +19,25 @@ const uglifyHTML = require('gulp-cshtml-minify');
 const replace = require('gulp-replace');
 
 // Public variables
-const production = true;
+const production = false;
 const devRoot = 'http://localhost/bluebirdrecs/dist/';
 const productionRoot = 'http://localhost/bluebirdrecs/dist/';
 //const productionRoot = 'https://bluebirdrecs.com/';
 
 const jsLibs = ['src/js/libs/jquery-3.4.1.min.js'];
-const ts = [
+const js = [
     'src/js/core.ts', 'src/js/template.ts', 'src/js/nav.ts', 
-    'src/js/home.ts'
+    'src/js/home.ts', 'src/js/music.ts'
 ];
 
 // Clean functions
-function cleanAll() {
-    return del('dist/**/*');
-}
-
-function cleanHTML() {
-    return del('dist/*.html');
-}
-
-function cleanCSS() {
-    return del('dist/style.css');
-}
-
-function cleanJS() {
-    return del('dist/main.js');
-}
-
-function cleanJSLibs() {
-    return del('dist/libs.js');
-}
-
-function cleanIMG() {
-    return del('dist/img/**/*');
-}
-
-function cleanHTACCESS() {
-    return del('dist/.htaccess');
-}
+function cleanAll() { return del('dist/**/*'); }
+function cleanHTML() { return del('dist/*.html'); }
+function cleanCSS() { return del('dist/style.css'); }
+function cleanJS() { return del('dist/main.js'); }
+function cleanJSLibs() { return del('dist/libs.js'); }
+function cleanIMG() { return del('dist/img/**/*'); }
+function cleanHTACCESS() { return del('dist/.htaccess'); }
 
 // Process user-defined files
 function processCSS() {
@@ -70,10 +50,14 @@ function processCSS() {
 }
 
 function processJS() {
-    return src(ts)
+    return src(js)
         .pipe(concat('main.ts'))
-        .pipe(typescript())
-        .pipe(concat('main.js'))
+        .pipe(typescript({
+            noImplicitAny: true,
+            allowJs: true,
+            outFile: 'main.js',
+            target: 'ES3', // ES3, ES5 or ES6
+        }))
         .pipe(gulpif(production, uglifyJS()))
         .pipe(dest('dist/'));
 }
@@ -88,7 +72,10 @@ function processHTML() {
             quiet: true
         }))
         .pipe(gulpif(production, replace('{root}', productionRoot), replace('{root}', devRoot)))
-        .pipe(gulpif(production, uglifyHTML({ urlSchemes: false })))
+        .pipe(gulpif(production, uglifyHTML({ 
+            urlSchemes: false,
+            optionalClosingTags: false
+        })))
         .pipe(dest('dist/'));
 }
 
