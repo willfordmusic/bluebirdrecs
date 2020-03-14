@@ -1,6 +1,13 @@
-<partial path="head.html"></partial>
-<partial path="nav.html"></partial>
+@@include('head.html', {
+    "pageTitle": "BlueBird Records | Artists"
+})
+@@include('nav.html')
+
 <main>
-    artists
+    <div class="music-page-container">
+        <div class="music-page-card" id="artists-page-card"></div>
+    </div>
 </main>
-<partial path="foot.html"></partial>
+
+@@include('grid-item.html')
+@@include('foot.html')

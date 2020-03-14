@@ -1,18 +1,13 @@
-<partial path="head.html"></partial>
-<partial path="nav.html"></partial>
+@@include('head.html', {
+    "pageTitle": "BlueBird Records | Music"
+})
+@@include('nav.html')
+
 <main>
-    <div class="music-page-container" id="music-page-container"></div>
+    <div class="music-page-container">
+        <div class="music-page-card" id="music-page-card"></div>
+    </div>
 </main>
 
-<!-- List Item Template -->
-<!-- Variables: artist, title, img, link -->
-<script type="text/html" id="music-list-item">
-    <div class="music-list-item">
-        <a href="{root}%%link%%/">
-            <img alt="%%title%%" src="%%img%%">
-            <div class="subtitle">%%subtitle%%</div>
-            <div class="title">%%title%%</div>
-        </a>
-    </div>
-</script>
-<partial path="foot.html"></partial>
+@@include('grid-item.html')
+@@include('foot.html')

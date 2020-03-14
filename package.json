@@ -19,6 +19,7 @@
     "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-cshtml-minify": "^1.0.4",
+    "gulp-file-include": "^2.1.1",
     "gulp-if": "^3.0.0",
     "gulp-inject-partials": "^1.0.5",
     "gulp-replace": "^1.0.0",

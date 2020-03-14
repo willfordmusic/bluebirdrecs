@@ -1,6 +1,8 @@
-<partial path="head.html"></partial>
-<partial path="nav.html"></partial>
+@@include('head.html', {
+    "pageTitle": "BlueBird Records | Artist"
+})
+@@include('nav.html')
 <main>
     artist
 </main>
-<partial path="foot.html"></partial>
+@@include('foot.html')

@@ -1,4 +1,5 @@
-// General requires
+//-- REQUIRE STATEMENTS --//
+
 const { watch, series, parallel, src, dest } = require('gulp');
 const del = require('del');
 const concat = require('gulp-concat');
@@ -14,22 +15,28 @@ const typescript = require('gulp-typescript');
 const uglifyJS = require('gulp-uglify');
 
 // HTML requires
-const injectPartials = require('gulp-inject-partials');
+//const injectPartials = require('gulp-inject-partials');
+const fileInclude = require('gulp-file-include');
 const uglifyHTML = require('gulp-cshtml-minify');
 const replace = require('gulp-replace');
 
-// Public variables
+
+//-- PUBLIC VARIABLES --//
 const production = false;
 const devRoot = 'http://localhost/bluebirdrecs/dist/';
 const productionRoot = 'http://localhost/bluebirdrecs/dist/';
 //const productionRoot = 'https://bluebirdrecs.com/';
 
-const jsLibs = ['src/js/libs/jquery-3.4.1.min.js'];
+const jsLibs = [
+    'src/js/libs/jquery-3.4.1.min.js'
+];
 const js = [
     'src/js/core.ts', 'src/js/template.ts', 'src/js/nav.ts', 
-    'src/js/home.ts', 'src/js/music.ts'
+    'src/js/home.ts', 'src/js/grid.ts'
 ];
 
+
+//-- GULP TASKS --//
 // Clean functions
 function cleanAll() { return del('dist/**/*'); }
 function cleanHTML() { return del('dist/*.html'); }
@@ -64,13 +71,16 @@ function processJS() {
 
 function processHTML() {
     return src('src/views/*.html')
-        .pipe(injectPartials({
+        .pipe(fileInclude({
+            basepath: './src/partials/'
+        }))
+        /*.pipe(injectPartials({
             start: '<partial path="{{path}}">',
             end: '</partial>',
             removeTags: true,
             prefix: '../partials/',
             quiet: true
-        }))
+        }))*/
         .pipe(gulpif(production, replace('{root}', productionRoot), replace('{root}', devRoot)))
         .pipe(gulpif(production, uglifyHTML({ 
             urlSchemes: false,
@@ -108,7 +118,8 @@ function watchFiles() {
     watch('src/.htaccess', series(cleanHTACCESS, processHTACCESS));
 }
 
-// Public tasks
+
+//-- TASK EXPORTS --//
 exports.default = series(cleanAll, parallel(processHTACCESS, libsJS, processCSS, processHTML, processJS, processIMG), watchFiles);
 
 exports.build = series(cleanAll, parallel(processHTACCESS, libsJS, processCSS, processHTML, processJS, processIMG));

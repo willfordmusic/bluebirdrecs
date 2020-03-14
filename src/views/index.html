@@ -1,5 +1,7 @@
-<partial path="head.html"></partial>
-<partial path="nav.html"></partial>
+@@include('head.html', {
+    "pageTitle": "BlueBird Records | Home"
+})
+@@include('nav.html')
 <main>
     <div class="banner">
         <div class="dummy"></div>
@@ -39,4 +41,4 @@
         </a>
     </div>
 </script>
-<partial path="foot.html"></partial>
+@@include('foot.html')
